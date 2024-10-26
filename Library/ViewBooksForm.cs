@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Library
 {
     public partial class ViewBooksForm : Form
     {
-        private LibraryRepository _libraryRepository;
+        private readonly LibraryRepository _libraryRepository;
 
         public ViewBooksForm(LibraryRepository libraryRepository)
         {
@@ -17,11 +16,13 @@ namespace Library
 
         private void LoadBooks()
         {
-            listBoxBooks.Items.Clear();
-            List<Book> books = _libraryRepository.GetAllBooks();
-            foreach (var book in books)
+            var books = _libraryRepository.GetAllItems();
+            foreach (var item in books)
             {
-                listBoxBooks.Items.Add(book.DisplayInfo());
+                if (item is Book book)
+                {
+                    listBoxBooks.Items.Add(book.DisplayInfo());
+                }
             }
         }
     }

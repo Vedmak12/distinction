@@ -5,7 +5,7 @@ namespace Library
 {
     public partial class AddMemberForm : Form
     {
-        private LibraryRepository _libraryRepository;
+        private readonly LibraryRepository _libraryRepository;
 
         public AddMemberForm(LibraryRepository libraryRepository)
         {
@@ -15,12 +15,10 @@ namespace Library
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var member = new Member
-            {
-                Id = int.Parse(textBoxMemberId.Text),
-                Name = textBoxMemberName.Text
-            };
+            int id = int.Parse(textBoxMemberId.Text);
+            string name = textBoxMemberName.Text;
 
+            var member = new Member(id, name);
             _libraryRepository.AddMember(member);
             MessageBox.Show("Member added successfully.");
             this.Close();

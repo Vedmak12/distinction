@@ -5,7 +5,7 @@ namespace Library
 {
     public partial class LoanBookForm : Form
     {
-        private LibraryRepository _libraryRepository;
+        private readonly LibraryRepository _libraryRepository;
 
         public LoanBookForm(LibraryRepository libraryRepository)
         {
@@ -18,14 +18,15 @@ namespace Library
             int bookId = int.Parse(textBoxBookId.Text);
             int memberId = int.Parse(textBoxMemberId.Text);
 
-            var loanSuccess = _libraryRepository.LoanBook(bookId, memberId);
+            var loanSuccess = _libraryRepository.LoanItem(bookId, memberId);
+
             if (loanSuccess)
             {
                 MessageBox.Show("Book loaned successfully.");
             }
             else
             {
-                MessageBox.Show("Book loaning failed. Please check if the book is available or if the member exists.");
+                MessageBox.Show("Loan failed. Check if the book is available and the member exists.");
             }
             this.Close();
         }

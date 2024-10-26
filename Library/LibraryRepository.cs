@@ -3,47 +3,38 @@ using System.Linq;
 
 namespace Library
 {
-    public class LibraryRepository
+    public class LibraryRepository : IBorrowable
     {
-        private List<Book> _books;
-        private List<Member> _members;
-        private List<Loan> _loans;
+        private List<LibraryItem> _items = new List<LibraryItem>();
+        private List<Member> _members = new List<Member>();
+        private List<Loan> _loans = new List<Loan>();
 
-        public LibraryRepository()
-        {
-            _books = new List<Book>();
-            _members = new List<Member>();
-            _loans = new List<Loan>();
-        }
+        public void AddItem(LibraryItem item) => _items.Add(item);
+        public void AddMember(Member member) => _members.Add(member);
 
-        public void AddBook(Book book)
-        {
-            _books.Add(book);
-        }
+        public List<LibraryItem> GetAllItems() => _items;
 
-        public void AddMember(Member member)
+        public bool LoanItem(int itemId, int memberId)
         {
-            _members.Add(member);
-        }
-
-        public List<Book> GetAllBooks()
-        {
-            return _books;
-        }
-
-        public bool LoanBook(int bookId, int memberId)
-        {
-            var book = _books.FirstOrDefault(b => b.Id == bookId && b.IsAvailable);
+            var item = _items.FirstOrDefault(i => i.Id == itemId && i.IsAvailable);
             var member = _members.FirstOrDefault(m => m.Id == memberId);
 
-            if (book != null && member != null)
+            if (item != null && member != null)
             {
-                book.IsAvailable = false;
-                _loans.Add(new Loan { BookId = bookId, MemberId = memberId });
+                item.IsAvailable = false;
+                _loans.Add(new Loan { BookId = itemId, MemberId = memberId });
                 return true;
             }
-
             return false;
+        }
+
+        public void ReturnItem(int itemId)
+        {
+            var item = _items.FirstOrDefault(i => i.Id == itemId);
+            if (item != null)
+            {
+                item.IsAvailable = true;
+            }
         }
     }
 }

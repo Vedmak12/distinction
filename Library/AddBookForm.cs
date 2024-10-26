@@ -5,7 +5,7 @@ namespace Library
 {
     public partial class AddBookForm : Form
     {
-        private LibraryRepository _libraryRepository;
+        private readonly LibraryRepository _libraryRepository;
 
         public AddBookForm(LibraryRepository libraryRepository)
         {
@@ -15,15 +15,12 @@ namespace Library
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var book = new Book
-            {
-                Id = int.Parse(textBoxId.Text),
-                Title = textBoxTitle.Text,
-                Author = textBoxAuthor.Text,
-                IsAvailable = true
-            };
+            int id = int.Parse(textBoxId.Text);
+            string title = textBoxTitle.Text;
+            string author = textBoxAuthor.Text;
 
-            _libraryRepository.AddBook(book);
+            var book = new Book(id, title, author);
+            _libraryRepository.AddItem(book);
             MessageBox.Show("Book added successfully.");
             this.Close();
         }
