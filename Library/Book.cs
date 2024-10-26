@@ -1,15 +1,21 @@
 ﻿namespace Library
 {
-    public class Book
+    public class Book : LibraryItem
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public bool IsAvailable { get; set; }
+        public string Author { get; private set; }
 
-        public string DisplayInfo()
+        public Book(int id, string title, string author)
         {
-            return $"{Id}: {Title} by {Author} - {(IsAvailable ? "Available" : "Not Available")}";
+            Id = id;
+            Title = title;
+            Author = author;
+            IsAvailable = true;
+        }
+
+        public override string DisplayInfo()
+        {
+            return $"{Id}: {Title} by {Author} - {(IsAvailable ? "Available" : "Loaned")}";
         }
     }
 }
+

@@ -3,6 +3,7 @@
     partial class ViewBooksForm
     {
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.ListBox listBoxBooks;
 
         protected override void Dispose(bool disposing)
         {
@@ -17,27 +18,17 @@
         {
             this.listBoxBooks = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
+
             // listBoxBooks
-            // 
-            this.listBoxBooks.FormattingEnabled = true;
-            this.listBoxBooks.ItemHeight = 16;
-            this.listBoxBooks.Location = new System.Drawing.Point(12, 12);
-            this.listBoxBooks.Name = "listBoxBooks";
-            this.listBoxBooks.Size = new System.Drawing.Size(776, 424);
-            this.listBoxBooks.TabIndex = 0;
-            // 
+            this.listBoxBooks.Location = new System.Drawing.Point(20, 20);
+            this.listBoxBooks.Size = new System.Drawing.Size(240, 200);
+
             // ViewBooksForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(300, 250);
             this.Controls.Add(this.listBoxBooks);
-            this.Name = "ViewBooksForm";
             this.Text = "View Books";
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
-
-        private System.Windows.Forms.ListBox listBoxBooks;
     }
 }

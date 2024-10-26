@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Library
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        private LibraryRepository _libraryRepository;
+        private readonly LibraryRepository _libraryRepository;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             _libraryRepository = new LibraryRepository();
@@ -26,16 +25,16 @@ namespace Library
             addMemberForm.ShowDialog();
         }
 
+        private void buttonLoanBook_Click(object sender, EventArgs e)
+        {
+            var loanBookForm = new LoanBookForm(_libraryRepository);
+            loanBookForm.ShowDialog();
+        }
+
         private void buttonViewBooks_Click(object sender, EventArgs e)
         {
             var viewBooksForm = new ViewBooksForm(_libraryRepository);
             viewBooksForm.ShowDialog();
-        }
-
-        private void buttonLoanBook_Click(object sender, EventArgs e)
-        {
-            var loanForm = new LoanBookForm(_libraryRepository);
-            loanForm.ShowDialog();
         }
     }
 }
